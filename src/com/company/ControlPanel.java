@@ -6,6 +6,7 @@ import java.awt.*;
 import java.io.*;
 import java.awt.event.WindowEvent;
 import java.awt.event.ActionEvent;
+import java.nio.file.Paths;
 
 public class ControlPanel extends JPanel {
     final MainFrame frame;
@@ -32,7 +33,9 @@ public class ControlPanel extends JPanel {
 
     private void save(ActionEvent e) {
         try {
-            ImageIO.write(frame.canvas.image, "PNG", new File("d:/test.png"));
+            String path = Paths.get("").toAbsolutePath().toString() + "\\test.png";
+            System.out.println(path);
+            ImageIO.write(frame.canvas.image, "PNG", new File(path));
         } catch (IOException ex) { System.err.println(ex); }
     }
 
@@ -42,7 +45,10 @@ public class ControlPanel extends JPanel {
             int W = frame.canvas.W;
             int H = frame.canvas.H;
 
-            frame.canvas.image = ImageIO.read(new File("d:/test.png"));
+            String path = Paths.get("").toAbsolutePath().toString() + "\\test.png";
+            System.out.println(path);
+
+            frame.canvas.image = ImageIO.read(new File(path));
             frame.canvas.graphics = frame.canvas.image.createGraphics();
             frame.canvas.repaint();
         } catch(IOException ex) { System.err.println(ex); }
